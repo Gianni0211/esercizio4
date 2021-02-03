@@ -11,6 +11,8 @@ public class Main {
 		System.out.println("Vorresti un saluto formale (digita Y), o un saluto informale (digita N)?");
 
 		String resp = scanner.nextLine();
+		
+		
 
 		ISalutatore salutatore;
 		if (!resp.equals("N") && !resp.equals("Y")) {
@@ -23,34 +25,39 @@ public class Main {
 			salutatore = new SalutoInformale();
 
 			int ora = scanner.nextInt();
-			if (ora > 24) {
-				System.out.println("Inserisci un orario da 0 a 24");
-				ora = scanner.nextInt();
-			}
-			if (ora >= 6 && ora <= 13) {
-				System.out.println(salutatore.salutaMattino(name));
-			} else if (ora >= 14 && ora <= 22) {
-				System.out.println(salutatore.salutaSera(name));
-			} else if (ora >= 23 && ora <= 5) {
-				System.out.println(salutatore.salutaNotte(name));
-			}
+			controllaOra(ora,  scanner);
+
+			
+			saluta(ora, scanner, name, salutatore);
 		} else {
 			salutatore = new SalutoFormale();
 			System.out.println("Che ore sono?");
 			int ora = scanner.nextInt();
-			if (ora > 24) {
-				System.out.println("Inserisci un orario da 0 a 24");
-				ora = scanner.nextInt();
-			}
-			if (ora >= 6 && ora <= 13) {
-				System.out.println(salutatore.salutaMattino(name));
-			} else if (ora >= 14 && ora <= 22) {
-				System.out.println(salutatore.salutaSera(name));
-			} else {
-				System.out.println(salutatore.salutaNotte(name));
-			}
+			controllaOra(ora, scanner);
+			saluta(ora, scanner, name, salutatore);
 
 		}
 
 	}
+	
+	
+	static  void saluta(int ora, Scanner scanner, String name, ISalutatore salutatore) {
+		
+		if (ora >= 6 && ora <= 13) {
+			System.out.println(salutatore.salutaMattino(name));
+		} else if (ora >= 14 && ora <= 22) {
+			System.out.println(salutatore.salutaSera(name));
+		} else   {
+			
+			System.out.println(salutatore.salutaNotte(name));
+		}
+	}
+	static void controllaOra(int ora, Scanner scanner) {
+		while(ora > 24) {
+			System.out.println("Inserisci un orario da 0 a 24");
+			ora = scanner.nextInt();
+			
+		}
+	}
+
 }
