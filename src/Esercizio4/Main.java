@@ -15,7 +15,7 @@ public class Main {
 		
 
 		ISalutatore salutatore;
-		if (!resp.equals("N") && !resp.equals("Y")) {
+		while(!resp.equals("N") && !resp.equals("Y")) {
 			System.out.println("Inserisci un valida lettera");
 			resp = scanner.nextLine();
 
@@ -25,15 +25,13 @@ public class Main {
 			salutatore = new SalutoInformale();
 
 			int ora = scanner.nextInt();
-			controllaOra(ora,  scanner);
-
-			
+			ora = controllaOra(ora,  scanner);
 			saluta(ora, scanner, name, salutatore);
 		} else {
 			salutatore = new SalutoFormale();
 			System.out.println("Che ore sono?");
 			int ora = scanner.nextInt();
-			controllaOra(ora, scanner);
+			ora = controllaOra(ora, scanner);
 			saluta(ora, scanner, name, salutatore);
 
 		}
@@ -52,12 +50,13 @@ public class Main {
 			System.out.println(salutatore.salutaNotte(name));
 		}
 	}
-	static void controllaOra(int ora, Scanner scanner) {
+	static int controllaOra(int ora, Scanner scanner) {
 		while(ora > 24) {
 			System.out.println("Inserisci un orario da 0 a 24");
 			ora = scanner.nextInt();
 			
 		}
+		return ora;
 	}
 
 }
